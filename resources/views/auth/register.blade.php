@@ -1,3 +1,4 @@
+{{-- views\auth\register.blade.php --}}
 @extends("layouts.auth")
 @section("style")
 <style>
@@ -21,8 +22,13 @@ body {
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
+.form-signin input[type="password"] {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -48,7 +54,7 @@ body {
                         type="text"
                         class="form-control"
                         id="floatingInput"
-                        placeholder="Enter Name"
+                        placeholder="Enter Name or XSS payload"
                     />
                     <label for="floatingInput">Full Name</label>
                     @error("fullname")
@@ -58,23 +64,24 @@ body {
 
                 <div class="form-floating">
                     <input name="email"
-                        type="email"
+                        type="text"
                         class="form-control"
-                        id="floatingInput"
-                        placeholder="name@example.com"
+                        id="floatingEmail"
+                        placeholder="Enter email or XSS payload"
                     />
-                    <label for="floatingInput">Email address</label>
+                    <label for="floatingEmail">Email address</label>
                     @error("email")
                     <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
-                
+
                 <div class="form-floating" style="margin-bottom: 10px">
                     <input name="password"
                         type="password"
                         class="form-control"
                         id="floatingPassword"
                         placeholder="Password"
+                        value="password123"
                     />
                     <label for="floatingPassword">Password</label>
                     @error("password")
@@ -83,21 +90,20 @@ body {
                 </div>
                @if(session()->has("success"))
                <div class="alert alert-success">
-                
-                {{ session()->get("success") }}
-
+                {!! session()->get("success") !!}
                </div>
                @endif
                @if(session("error"))
                <div class="alert alert-danger">
-                
-                {{ session("error") }}
-
+                {!! session("error") !!}
                </div>
                @endif
                 <button class="btn btn-primary w-100 py-2" type="submit">
                     Register
                 </button>
+
+                <a href="{{ route("login") }}" class="text-center">Already have an account? Sign in</a>
+
                 <p class="mt-5 mb-3 text-body-secondary">&copy; 2025</p>
             </form>
         </main>

@@ -1,3 +1,4 @@
+{{-- views\layouts\default.blade.php --}}
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -9,10 +10,10 @@
     @yield("style")
   </head>
   <body class="d-flex flex-column h-100">
-    @include("include.header")
+    @include("include.header") 
     @yield("content")
     @include("include.footer")
- 
+
    <script src="{{ asset("assets\js\bootstrap.min.js") }}"></script>
   </body>
 </html>
